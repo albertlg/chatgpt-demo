@@ -18,7 +18,7 @@ interface Props {
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement
   let welcomeMessageRef: HTMLTextAreaElement
-  const [temperature, setTemperature] = createSignal(0.5)
+  const [temperature, setTemperature] = createSignal(0.3)
 
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value)
@@ -31,10 +31,10 @@ export default (props: Props) => {
   })
 
   return (
-    <div class="my-4">
+    <div class="my-4 hidden">
       <Show when={!props.systemRoleEditing()}>
         <Show when={props.currentSystemRoleSettings()}>
-          <div class="hidden">
+          <div>
             <div class="fi gap-1 op-50 dark:op-60">
               <Show when={props.canEdit()} fallback={<IconEnv />}>
                 <span onClick={() => props.setCurrentSystemRoleSettings('')} class="sys-edit-btn p-1 rd-50%" > <IconX /> </span>
