@@ -10,15 +10,19 @@ interface Props {
   setSystemRoleEditing: Setter<boolean>
   currentSystemRoleSettings: Accessor<string>
   setCurrentSystemRoleSettings: Setter<string>
+  welcomeAssistantMessage: Accessor<string>
+  setWelcomeAssistantMessage: Setter<string>
   temperatureSetting: (value: number) => void
 }
 
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement
+  let welcomeMessageRef: HTMLTextAreaElement
   const [temperature, setTemperature] = createSignal(0.5)
 
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value)
+    props.setWelcomeAssistantMessage(welcomeMessageRef.value)
     props.setSystemRoleEditing(false)
   }
 
@@ -60,11 +64,19 @@ export default (props: Props) => {
             <textarea
               ref={systemInputRef!}
               placeholder="You are a helpful assistant, answer as concisely as possible...."
-              autocomplete="off"
-              autofocus
+              autoComplete="off"
+              autoFocus
               rows="3"
               gen-textarea
             />
+            <textarea
+              ref={welcomeMessageRef!}
+              placeholder="Hello..."
+              autoComplete="off"
+              autoFocus
+              rows="3"
+              gen-textarea
+          />
           </div>
           <div class="w-full fi fb">
             <button onClick={handleButtonClick} gen-slate-btn>
